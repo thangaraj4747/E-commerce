@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CategoryComponent } from './category/category.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ListproductsComponent } from './Products/listproducts/listproducts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { ProductListComponent } from './product-list/product-list.component';
     CategoryComponent,
     NewsletterComponent,
     BreadcrumbComponent,
-    ProductListComponent
+    ListproductsComponent
   ],
   imports: [
     BrowserModule,
