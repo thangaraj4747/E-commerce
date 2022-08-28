@@ -9,6 +9,14 @@ import { CategoryComponent } from './category/category.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { ListproductsComponent } from './Products/listproducts/listproducts.component';
+import { LoginComponent } from './login/login.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { AboutComponent } from './about/about.component';
+import { EventsComponent } from './events/events.component';
+import { ServicesComponent } from './services/services.component';
+import { ShortCodesComponent } from './short-codes/short-codes.component';
+import { FaqsComponent } from './policy-info/faqs/faqs.component';
+import { PrivacyComponent } from './policy-info/privacy/privacy.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +26,15 @@ import { ListproductsComponent } from './Products/listproducts/listproducts.comp
     CategoryComponent,
     NewsletterComponent,
     BreadcrumbComponent,
-    ListproductsComponent
+    ListproductsComponent,
+    LoginComponent,
+    NotfoundComponent,
+    AboutComponent,
+    EventsComponent,
+    ServicesComponent,
+    ShortCodesComponent,
+    FaqsComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

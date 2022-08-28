@@ -1,8 +1,13 @@
 <app-header></app-header>
 <app-breadcrumb></app-breadcrumb>
 <div class="banner">
-	<app-category></app-category>
-	<app-listproducts></app-listproducts>
+	<div class="w3l_banner_nav_left">
+		<app-category></app-category>
+	</div>
+	<div class="w3l_banner_nav_right">
+		<router-outlet></router-outlet>
+	</div>
+	<div class="clearfix"></div>
 </div>
 <app-newsletter></app-newsletter>
 <app-footer></app-footer>
