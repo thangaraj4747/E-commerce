@@ -17,6 +17,7 @@ import { ServicesComponent } from './services/services.component';
 import { ShortCodesComponent } from './short-codes/short-codes.component';
 import { FaqsComponent } from './policy-info/faqs/faqs.component';
 import { PrivacyComponent } from './policy-info/privacy/privacy.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PrivacyComponent } from './policy-info/privacy/privacy.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

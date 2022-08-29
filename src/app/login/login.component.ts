@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UsersService } from '../users.service';
 
 declare var $: any;
 
@@ -9,7 +11,7 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userSer: UsersService) { }
 
   ngOnInit(): void {
     $('.toggle').click(()=>{
@@ -23,6 +25,10 @@ export class LoginComponent implements OnInit {
         opacity: "toggle"
       }, "slow");
     });
+  }
+
+  doRegisteration(formData: NgForm) {
+this.userSer.userRegisteration(formData.value);
   }
 
 }
