@@ -18,6 +18,7 @@ import { ShortCodesComponent } from './short-codes/short-codes.component';
 import { FaqsComponent } from './policy-info/faqs/faqs.component';
 import { PrivacyComponent } from './policy-info/privacy/privacy.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,14 +36,10 @@ import { FormsModule } from '@angular/forms';
     ServicesComponent,
     ShortCodesComponent,
     FaqsComponent,
-    PrivacyComponent
+    PrivacyComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
