@@ -8,16 +8,22 @@
             </div>
             <div class="form">
                 <h2>Login to your account</h2>
-                <form action="#" method="post">
-                    <input type="text" name="Username" placeholder="Username" required=" ">
-                    <input type="password" name="Password" placeholder="Password" required=" ">
-                    <input type="submit" value="Login">
+                <p class="alert alert-danger" *ngIf="msg">{{msg}}</p>
+                <button (click)="getData()">Get Data</button>
+                <form [formGroup]="loginForm" (submit)="doLogin()">
+                    <input type="text" name="Username" placeholder="Username" formControlName="Username">
+                    <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.invalid">Please enter username</p>
+                    <input type="password" name="Password" placeholder="Password" formControlName="Password">
+                    <p class="alert alert-danger" *ngIf="pwdCtrl.errors?.['minlength']">Please enter minimum 3 characters</p>
+                    <input type="submit" value="Login" [disabled]="loginForm.invalid">
                 </form>
             </div>
             <div class="form">
                 <h2>Create an account</h2>
+                <p class="alert alert-success" *ngIf="msg">{{msg}}</p>
                 <form #f="ngForm" (submit)="doRegisteration(f)">
-                    <input type="text" name="Username" placeholder="Username" required=" " ngModel>
+                    <input type="text" name="Username" placeholder="Username" required=" " ngModel (blur)="checkUsername(uname.value)" #uname="ngModel">
+                    <p class="alert alert-danger" *ngIf="!unameAvailablity && uname.touched">Username already taken</p>
                     <input type="password" name="Password" placeholder="Password" required=" " ngModel>
                     <input type="email" name="Email" placeholder="Email Address" required=" " ngModel>
                     <input type="text" name="Phone" placeholder="Phone Number" required=" " ngModel>

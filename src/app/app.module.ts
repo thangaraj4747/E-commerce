@@ -17,7 +17,7 @@ import { ServicesComponent } from './services/services.component';
 import { ShortCodesComponent } from './short-codes/short-codes.component';
 import { FaqsComponent } from './policy-info/faqs/faqs.component';
 import { PrivacyComponent } from './policy-info/privacy/privacy.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -38,7 +38,13 @@ import { HttpClientModule } from '@angular/common/http';
     FaqsComponent,
     PrivacyComponent,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -23,7 +23,7 @@
             <li class="dropdown profile_details_drop">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"
                         aria-hidden="true"></i><span class="caret"></span></a>
-                <div class="mega-dropdown-menu">
+                <div class="mega-dropdown-menu" *ngIf="!userSer.isLoggedIn()">
                     <div class="w3ls_vegetables">
                         <ul class="dropdown-menu drp-mnu">
                             <li><a routerLink="/login">Login</a></li>
@@ -31,6 +31,14 @@
                         </ul>
                     </div>
                 </div>
+                <div class="mega-dropdown-menu" *ngIf="userSer.isLoggedIn()">
+                  <div class="w3ls_vegetables">
+                      <ul class="dropdown-menu drp-mnu">
+                          <li><a>Add Products</a></li>
+                          <li><a (click)="doLogout()">Sign out</a></li>
+                      </ul>
+                  </div>
+              </div>
             </li>
         </ul>
     </div>
