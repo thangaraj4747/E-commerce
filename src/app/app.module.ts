@@ -19,6 +19,9 @@ import { FaqsComponent } from './policy-info/faqs/faqs.component';
 import { PrivacyComponent } from './policy-info/privacy/privacy.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ViewcartComponent } from './viewcart/viewcart.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +40,15 @@ import { HttpClientModule } from '@angular/common/http';
     ShortCodesComponent,
     FaqsComponent,
     PrivacyComponent,
+    ViewcartComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
   ],
   providers: [],

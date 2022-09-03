@@ -23,6 +23,6 @@ export class UsersService {
     return this.http.post<string>(this.server + API_INFO.login, loginData);
   }
   isLoggedIn() {
-    return !!localStorage.getItem('loggedKey');
+    return !!localStorage.getItem('loggedUser');
   }
 }

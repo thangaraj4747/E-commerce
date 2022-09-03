@@ -1,3 +1,4 @@
+import { SpinnerService } from './../spinner.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   msg: string;
   unameAvailablity: boolean;
-  constructor(public userSer: UsersService, public myRouter: Router) {}
+  constructor(
+    public userSer: UsersService,
+    public myRouter: Router,
+    public spinnerSer: SpinnerService
+  ) {}
 
   ngOnInit(): void {
     $('.toggle').click(() => {
@@ -48,22 +53,26 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('Password');
   }
 
-  getData() {
+  getUserData() {
     this.loginForm.patchValue({
       Username: 'gold',
     });
   }
   checkUsername(uname: string) {
+    this.spinnerSer.isLoading.next(true);
     this.userSer.checkAvailablity(uname).subscribe({
       next: (res: number) => {
         if (res > 0) {
           this.unameAvailablity = false;
+          this.spinnerSer.isLoading.next(false);
           return;
         }
         this.unameAvailablity = true;
+        this.spinnerSer.isLoading.next(false);
       },
       error: (err: any) => {
         console.log(err);
+        this.spinnerSer.isLoading.next(false);
       },
     });
   }
@@ -82,14 +91,15 @@ export class LoginComponent implements OnInit {
     this.userSer.doLogin(this.loginForm.value).subscribe({
       next: (res: string) => {
         if (res.length != 0) {
-          localStorage.setItem('loggedKey', res);
+          localStorage.setItem('loggedUser', res);
           this.myRouter.navigateByUrl('/');
           return;
         }
-        this.msg = 'Invalid credential / Something went wrong';
+        this.msg = 'Invalid Username / Password';
       },
       error: (err: any) => {
         console.log(err);
+        this.msg = 'Something went wrong!';
       },
     });
   }

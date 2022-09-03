@@ -1,3 +1,4 @@
+import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,14 +10,20 @@ import { Component, OnInit } from '@angular/core';
 export class ListproductsComponent implements OnInit {
   productLists: any[] = [];
 
-  constructor(public pdtSer: ProductsService) {}
+  constructor(
+    public pdtSer: ProductsService,
+    public spinnerSer: SpinnerService
+  ) {}
 
   ngOnInit(): void {
+    this.spinnerSer.isLoading.next(true);
     this.pdtSer.getProductList().subscribe({
       next: (res) => {
+        this.spinnerSer.isLoading.next(false);
         this.productLists = res;
       },
       error: (error) => {
+        this.spinnerSer.isLoading.next(false);
         console.log(error);
       },
     });
