@@ -59,20 +59,16 @@ export class LoginComponent implements OnInit {
     });
   }
   checkUsername(uname: string) {
-    this.spinnerSer.isLoading.next(true);
     this.userSer.checkAvailablity(uname).subscribe({
       next: (res: number) => {
         if (res > 0) {
           this.unameAvailablity = false;
-          this.spinnerSer.isLoading.next(false);
           return;
         }
         this.unameAvailablity = true;
-        this.spinnerSer.isLoading.next(false);
       },
       error: (err: any) => {
         console.log(err);
-        this.spinnerSer.isLoading.next(false);
       },
     });
   }

@@ -3,4 +3,5 @@ export const API_INFO = {
   usernameCheck: '/usernamecheck/{username}',
   register: '/register',
   login: '/login',
+  mycart: '/mycart',
 };

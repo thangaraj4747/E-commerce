@@ -16,14 +16,11 @@ export class ListproductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.spinnerSer.isLoading.next(true);
     this.pdtSer.getProductList().subscribe({
       next: (res) => {
-        this.spinnerSer.isLoading.next(false);
         this.productLists = res;
       },
       error: (error) => {
-        this.spinnerSer.isLoading.next(false);
         console.log(error);
       },
     });

@@ -18,10 +18,12 @@ import { ShortCodesComponent } from './short-codes/short-codes.component';
 import { FaqsComponent } from './policy-info/faqs/faqs.component';
 import { PrivacyComponent } from './policy-info/privacy/privacy.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ViewcartComponent } from './viewcart/viewcart.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { HttpinterceptorService } from './httpinterceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ViewcartComponent } from './viewcart/viewcart.component';
     FaqsComponent,
     PrivacyComponent,
     ViewcartComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,13 @@ import { ViewcartComponent } from './viewcart/viewcart.component';
     MatProgressSpinnerModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpinterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

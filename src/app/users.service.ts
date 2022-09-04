@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { API_INFO } from './api.constant';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ILoginData, IRegisterationData } from './login/data/login.model';
@@ -22,7 +22,20 @@ export class UsersService {
   doLogin(loginData: ILoginData): Observable<string> {
     return this.http.post<string>(this.server + API_INFO.login, loginData);
   }
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     return !!localStorage.getItem('loggedUser');
+  }
+  getMyToken() {
+    return localStorage.getItem('loggedUser');
+  }
+  // getMyCartItem() {
+  //   return this.http.get<any[]>(this.server + API_INFO.mycart, {
+  //     headers: new HttpHeaders({
+  //       myauthtoken: this.getMyToken() ? this.getMyToken() : '',
+  //     }),
+  //   });
+  // }
+  getMyCartItem() {
+    return this.http.get<any[]>(this.server + API_INFO.mycart);
   }
 }
