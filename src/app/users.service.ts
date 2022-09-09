@@ -38,4 +38,7 @@ export class UsersService {
   getMyCartItem() {
     return this.http.get<any[]>(this.server + API_INFO.mycart);
   }
+  getMyCartCount() {
+    return this.http.get<number>(this.server + API_INFO.cartcount);
+  }
 }

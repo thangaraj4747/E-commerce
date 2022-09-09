@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ViewcartComponent } from './viewcart/viewcart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HttpinterceptorService } from './httpinterceptor.service';
+import { AddProductsComponent } from './add-products/add-products.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HttpinterceptorService } from './httpinterceptor.service';
     PrivacyComponent,
     ViewcartComponent,
     SpinnerComponent,
+    AddProductsComponent,
   ],
   imports: [
     BrowserModule,

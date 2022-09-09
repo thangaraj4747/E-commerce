@@ -1,3 +1,4 @@
+import { AddProductsComponent } from './add-products/add-products.component';
 import { ViewcartComponent } from './viewcart/viewcart.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -26,6 +27,9 @@ const routes: Routes = [
     component: ViewcartComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'category', redirectTo: '/', pathMatch: 'full' },
+  { path: 'category/:catid', component: ListproductsComponent },
+  { path: 'add-products', component: AddProductsComponent },
   { path: '**', component: NotfoundComponent },
 ];
 

@@ -4,4 +4,9 @@ export const API_INFO = {
   register: '/register',
   login: '/login',
   mycart: '/mycart',
+  category: '/getcategories',
+  pdtCatwise: '/getpdtcatwise/{catid}',
+  cartcount: '/cartcount',
+  addtocart: '/addtocart',
+  delete: '/removecart/{cartid}',
 };

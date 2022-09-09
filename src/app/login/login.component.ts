@@ -1,4 +1,4 @@
-import { SpinnerService } from './../spinner.service';
+import { ProductsService } from './../products.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public userSer: UsersService,
     public myRouter: Router,
-    public spinnerSer: SpinnerService
+    public pdtSer: ProductsService
   ) {}
 
   ngOnInit(): void {
@@ -88,6 +88,7 @@ export class LoginComponent implements OnInit {
       next: (res: string) => {
         if (res.length != 0) {
           localStorage.setItem('loggedUser', res);
+          this.pdtSer.cartCount.next('emit');
           this.myRouter.navigateByUrl('/');
           return;
         }

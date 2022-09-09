@@ -5,3 +5,8 @@ export interface IListProducts {
   pdtDesc: string;
   pdtImg: string;
 }
+
+export interface ICategory {
+  _id: number;
+  catName: string;
+}

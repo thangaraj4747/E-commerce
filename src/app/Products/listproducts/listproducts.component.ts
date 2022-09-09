@@ -1,6 +1,7 @@
 import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-listproducts',
@@ -12,7 +13,8 @@ export class ListproductsComponent implements OnInit {
 
   constructor(
     public pdtSer: ProductsService,
-    public spinnerSer: SpinnerService
+    public spinnerSer: SpinnerService,
+    public aRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -24,5 +26,38 @@ export class ListproductsComponent implements OnInit {
         console.log(error);
       },
     });
+    this.aRoute.params.subscribe({
+      next: (params: Params) => {
+        this.getPdtCatwise(params['catid']);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  getPdtCatwise(catid: string) {
+    this.pdtSer.getPdtCatwise(catid).subscribe({
+      next: (data) => {
+        this.productLists = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  addToCarrt(id: number, price: number) {
+    this.pdtSer
+      .addToCart({
+        cartPdtId: id,
+        cartPdtPrice: price,
+      })
+      .subscribe({
+        next: (res) => {
+          this.pdtSer.cartCount.next('emited');
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }

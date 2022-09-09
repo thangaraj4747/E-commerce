@@ -15,7 +15,10 @@
                                             class="img-responsive" /></a>
                                     <p>{{products.pdtName}}</p>
                                     <h4>{{products.pdtPrice - (products.pdtPrice * 20/100) | currency: 'INR' }} <span>{{products.pdtPrice | currency: 'INR' }}</span></h4>
-                                </div>
+                                  </div>
+                                  <div class="snipcart-details">
+                                    <input type="submit" name="submit" value="Add to cart" class="button" (click)="addToCarrt(products._id, products.pdtPrice)"/>
+                                  </div>
                             </div>
                         </figure>
                     </div>
