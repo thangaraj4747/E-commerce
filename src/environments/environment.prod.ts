@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  server: 'https://credo-shoppingcartv5.herokuapp.com',
 };

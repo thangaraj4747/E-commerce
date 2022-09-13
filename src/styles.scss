@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./variables.scss";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.mat-progress-spinner {
+  position: fixed !important;
+  left: 50%;
+  top: 50%;
+  circle {
+    stroke: $spinner-color;
+  }
+}
+input[type="submit"]:disabled {
+  opacity: 0.5;
+}
+.mat-snack-bar-container.shopping-snack-bar-container {
+  margin: 0;
+  border-radius: 5px 5px 0 0;
+  width: 100vw;
+  max-width: 100%;
+  text-align: center;
+  color: $white;
+  &.success {
+    background-color: $success;
+    font-size: 1.5em;
+  }
+  &.failure {
+    background-color: $failure;
+  }
+  &.info {
+    background-color: $warning;
+  }
+}

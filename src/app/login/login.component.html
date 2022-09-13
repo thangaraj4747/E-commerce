@@ -1,0 +1,40 @@
+<!-- login -->
+<div class="w3_login">
+    <h3>Sign In & Sign Up</h3>
+    <div class="w3_login_module">
+        <div class="module form-module">
+            <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+                <div class="tooltip">Click Me</div>
+            </div>
+            <div class="form">
+                <h2>Login to your account</h2>
+                <button (click)="getUserData()">Get User Data</button>
+                <form [formGroup]="loginForm" (submit)="doLogin()">
+                    <input type="text" name="Username" placeholder="Username" formControlName="Username">
+                    <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.invalid">Please Enter Username</p>
+                    <input type="password" name="Password" placeholder="Password" formControlName="Password">
+                    <p class="alert alert-danger" *ngIf="pwdCtrl.touched && pwdCtrl.errors?.['required']">Please Enter Password</p>
+                    <p class="alert alert-danger" *ngIf="pwdCtrl.touched && pwdCtrl.errors?.['minlength']">Please Enter Minimum 3 Characters</p>
+                    <input type="submit" value="Login" [disabled]="loginForm.invalid">
+                </form>
+            </div>
+            <div class="form">
+                <h2>Create an account</h2>
+                <form #f="ngForm" (submit)="doRegisteration(f)">
+                    <input type="text" name="Username" placeholder="Username" required=" " ngModel (blur)="checkUsername(uname.value)" #uname="ngModel" minlength="3">
+                    <p class="alert alert-danger" *ngIf="!unameAvailablity && uname.dirty">Username Already Taken</p>
+                    <p class="alert alert-danger" *ngIf="uname.errors?.['minlength']">Please Enter Minimum 3 Characters</p>
+                    <input type="password" name="Password" placeholder="Password" required=" " ngModel #pwd="ngModel" minlength="5">
+                    <p class="alert alert-danger" *ngIf="pwd.invalid && pwd.dirty">Please Enter Minimum 5 Characters</p>
+                    <input type="email" name="Email" placeholder="Email Address" required=" " ngModel #email="ngModel" pattern="[a-zA-Z0-9!#$%&amp;'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*">
+                    <p class="alert alert-danger" *ngIf="email.invalid && email.dirty">Please Enter Valid Email Address</p>
+                    <input type="tel" name="Phone" placeholder="Phone Number" required=" " ngModel pattern="^[6-9]\d{9}$" minlength="10" maxlength="10" #phone="ngModel">
+                    <p class="alert alert-danger" *ngIf="phone.invalid && phone.dirty">Please Enter Valid Phone Number</p>
+                    <input type="submit" value="Register" [disabled]="!unameAvailablity || f.invalid">
+                </form>
+            </div>
+            <div class="cta"><a href="#">Forgot your password?</a></div>
+        </div>
+    </div>
+</div>
+<!-- //login -->
