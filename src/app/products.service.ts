@@ -34,4 +34,7 @@ export class ProductsService {
       this.server + API_INFO.delete.replace('{cartid}', `${pdtId}`)
     );
   }
+  updateCart(pdtDetails: any) {
+    return this.http.put<string>(this.server + API_INFO.updateCart, pdtDetails);
+  }
 }

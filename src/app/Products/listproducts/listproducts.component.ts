@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../snackbar.service';
 import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +15,8 @@ export class ListproductsComponent implements OnInit {
   constructor(
     public pdtSer: ProductsService,
     public spinnerSer: SpinnerService,
-    public aRoute: ActivatedRoute
+    public aRoute: ActivatedRoute,
+    public snackBarSer: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -22,16 +24,16 @@ export class ListproductsComponent implements OnInit {
       next: (res) => {
         this.productLists = res;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
     this.aRoute.params.subscribe({
       next: (params: Params) => {
         this.getPdtCatwise(params['catid']);
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }
@@ -40,8 +42,8 @@ export class ListproductsComponent implements OnInit {
       next: (data) => {
         this.productLists = data;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }
@@ -54,9 +56,10 @@ export class ListproductsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.pdtSer.cartCount.next('emited');
+          this.snackBarSer.openSnackBar(res, 'success');
         },
-        error: (error) => {
-          console.log(error);
+        error: () => {
+          this.snackBarSer.openSnackBar('Something went wrong', 'failure');
         },
       });
   }

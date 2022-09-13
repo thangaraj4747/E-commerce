@@ -1,3 +1,4 @@
+import { SnackbarService } from './../snackbar.service';
 import { ProductsService } from './../products.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -13,12 +14,12 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  msg: string;
   unameAvailablity: boolean;
   constructor(
     public userSer: UsersService,
     public myRouter: Router,
-    public pdtSer: ProductsService
+    public pdtSer: ProductsService,
+    public snackBarSer: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -67,19 +68,19 @@ export class LoginComponent implements OnInit {
         }
         this.unameAvailablity = true;
       },
-      error: (err: any) => {
-        console.log(err);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }
   doRegisteration(formData: NgForm) {
     this.userSer.userRegisteration(formData.value).subscribe({
       next: (res: string) => {
-        this.msg = res;
+        this.snackBarSer.openSnackBar(res, 'success');
         formData.reset();
       },
-      error: (err: any) => {
-        console.log(err);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }
@@ -92,11 +93,10 @@ export class LoginComponent implements OnInit {
           this.myRouter.navigateByUrl('/');
           return;
         }
-        this.msg = 'Invalid Username / Password';
+        this.snackBarSer.openSnackBar('Invalid Username / Password', 'success');
       },
-      error: (err: any) => {
-        console.log(err);
-        this.msg = 'Something went wrong!';
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }

@@ -1,3 +1,4 @@
+import { SnackbarService } from './../snackbar.service';
 import { ProductsService } from './../products.service';
 import { Router } from '@angular/router';
 import { UsersService } from './../users.service';
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     public userSer: UsersService,
     public myRouter: Router,
-    public pdtSer: ProductsService
+    public pdtSer: ProductsService,
+    public snackBarSer: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -34,8 +36,8 @@ export class HeaderComponent implements OnInit {
       next: (data) => {
         this.cartCount = data;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }

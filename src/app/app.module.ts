@@ -1,3 +1,4 @@
+import { SnackbarComponent } from './snackbar/snackbar.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -25,6 +26,11 @@ import { ViewcartComponent } from './viewcart/viewcart.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { HttpinterceptorService } from './httpinterceptor.service';
 import { AddProductsComponent } from './add-products/add-products.component';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -46,6 +52,7 @@ import { AddProductsComponent } from './add-products/add-products.component';
     ViewcartComponent,
     SpinnerComponent,
     AddProductsComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +61,8 @@ import { AddProductsComponent } from './add-products/add-products.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatIconModule,
     AppRoutingModule,
   ],
   providers: [
@@ -62,6 +71,7 @@ import { AddProductsComponent } from './add-products/add-products.component';
       useClass: HttpinterceptorService,
       multi: true,
     },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
   ],
   bootstrap: [AppComponent],
 })

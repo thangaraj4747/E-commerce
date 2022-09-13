@@ -1,3 +1,4 @@
+import { SnackbarService } from './../snackbar.service';
 import { ICategory } from './../Products/listproducts/products.model';
 import { ProductsService } from './../products.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  constructor(public pdtSer: ProductsService) {}
+  constructor(
+    public pdtSer: ProductsService,
+    public snackBarSer: SnackbarService
+  ) {}
   categoryList: ICategory[];
   ngOnInit(): void {
     this.getCategory();
@@ -19,8 +23,8 @@ export class CategoryComponent implements OnInit {
       next: (data) => {
         this.categoryList = data;
       },
-      error: (error) => {
-        console.log(error);
+      error: () => {
+        this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
   }
