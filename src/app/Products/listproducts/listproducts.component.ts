@@ -3,6 +3,7 @@ import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { IPdtDetails } from './products.model';
 
 @Component({
   selector: 'app-listproducts',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./listproducts.component.scss'],
 })
 export class ListproductsComponent implements OnInit {
-  productLists: any[] = [];
+  productLists: IPdtDetails[] = [];
 
   constructor(
     public pdtSer: ProductsService,
@@ -39,7 +40,7 @@ export class ListproductsComponent implements OnInit {
   }
   getPdtCatwise(catid: string) {
     this.pdtSer.getPdtCatwise(catid).subscribe({
-      next: (data) => {
+      next: (data: IPdtDetails[]) => {
         this.productLists = data;
       },
       error: () => {

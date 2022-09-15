@@ -1,6 +1,7 @@
+import { IViewCart } from './Products/listproducts/products.model';
 import { Observable } from 'rxjs';
 import { API_INFO } from './api.constant';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ILoginData, IRegisterationData } from './login/data/login.model';
@@ -36,7 +37,7 @@ export class UsersService {
   //   });
   // }
   getMyCartItem() {
-    return this.http.get<any[]>(this.server + API_INFO.mycart);
+    return this.http.get<IViewCart[]>(this.server + API_INFO.mycart);
   }
   getMyCartCount() {
     return this.http.get<number>(this.server + API_INFO.cartcount);

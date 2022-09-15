@@ -3,6 +3,7 @@ import { ProductsService } from './../products.service';
 import { Router } from '@angular/router';
 import { UsersService } from './../users.service';
 import { Component, OnInit } from '@angular/core';
+import { IViewCart } from '../Products/listproducts/products.model';
 
 @Component({
   selector: 'app-viewcart',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./viewcart.component.scss'],
 })
 export class ViewcartComponent implements OnInit {
-  productList: any[] = [];
+  productList: IViewCart[] = [];
   totalAmount: number = 0;
   constructor(
     public userSer: UsersService,
@@ -20,8 +21,7 @@ export class ViewcartComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.userSer.getMyCartItem().subscribe({
-      next: (data: any[]) => {
-        console.log(data);
+      next: (data: IViewCart[]) => {
         this.productList = data;
         this.productList.forEach((obj) => {
           this.totalAmount += obj.cartPdtPrice;
