@@ -46,7 +46,7 @@
     <div class="col-md-4 checkout-left-basket">
       <h4>Continue to basket</h4>
       <ul>
-        <li *ngFor="let products of productList; index as i">Product{{i+1}} <i>-</i> <span>{{products.cartPdtPrice | currency: 'INR'}} </span></li>
+        <li *ngFor="let products of productList">{{products.productdetails[0].pdtName}} <i>-</i> <span>{{products.cartPdtPrice | currency: 'INR'}} </span></li>
         <li>Total Service Charges <i>-</i> <span>$00.00</span></li>
         <li>Total <i>-</i> <span>{{totalAmount | currency: 'INR'}}</span></li>
       </ul>

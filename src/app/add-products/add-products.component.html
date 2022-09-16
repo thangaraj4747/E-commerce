@@ -1,1 +1,29 @@
-<p>add-products works!</p>
+<!-- add products -->
+<div class="w3_login">
+  <h3>Add Products</h3>
+  <div class="w3_login_module">
+      <div class="module form-module">
+          <div class="form">
+              <h2>Create Products</h2>
+              <form (submit)="doAddProducts()" [formGroup]="addProductForm">
+                <select name="catId" formControlName="pdtCatId">
+                  <option value="">Please select Categories</option>
+                  <option *ngFor="let cat of categoryList" value="{{cat._id}}">
+                    {{cat.catName}}
+                  </option>
+                </select>
+                <p class="alert alert-danger" *ngIf="addProductForm.get('pdtCatId').touched && addProductForm.get('pdtCatId').pristine">Please Select Any One Category From The List</p>
+                <input type="text" name="pdtName" placeholder="Product Name" formControlName="pdtName">
+                <p class="alert alert-danger" *ngIf="addProductForm.get('pdtName').errors?.['minlength']">Please Enter Minimum 3 Characters</p>
+                <p class="alert alert-danger" *ngIf="addProductForm.get('pdtName').touched && addProductForm.get('pdtName').pristine">Please Enter Product Name</p>
+                <input type="number" name="pdtPrice" placeholder="Product Price" formControlName="pdtPrice">
+                <p class="alert alert-danger" *ngIf="addProductForm.get('pdtPrice').pristine && addProductForm.get('pdtPrice').touched " >Please Enter Price As Above $0</p>
+                <input type="file" name="pdtImg" formControlName="pdtImg" (change)="getImage($event)">
+               <textarea name="pdtDesc" cols="30" rows="5" formControlName="pdtDesc"></textarea>
+                <input type="submit" value="Add Products" [disabled]="addProductForm.invalid">
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- //add products -->
