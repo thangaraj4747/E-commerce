@@ -796,7 +796,7 @@ a.btn.btn-primary {
 }
  select.form-control.option-w3ls {
     width: 100%;
-    padding: 1em 1em 1em 1em;
+    padding: 1em 1em 0.5em 1em;
     font-size: 0.8em;
     margin: 0.5em 0;
     outline: none;
@@ -2787,7 +2787,7 @@ input.checkbox:checked:after {
   margin: 0 0 20px;
   padding: 10px 15px;
   box-sizing: border-box;
-  font-wieght: 400;
+  font-weight: 400;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
   font-size:14px;

@@ -29,13 +29,15 @@ export class UsersService {
   getMyToken() {
     return localStorage.getItem('loggedUser');
   }
-  // getMyCartItem() {
-  //   return this.http.get<any[]>(this.server + API_INFO.mycart, {
-  //     headers: new HttpHeaders({
-  //       myauthtoken: this.getMyToken() ? this.getMyToken() : '',
-  //     }),
-  //   });
-  // }
+  /*
+  getMyCartItem() {
+    return this.http.get<any[]>(this.server + API_INFO.mycart, {
+      headers: new HttpHeaders({
+        myauthtoken: this.getMyToken() ? this.getMyToken() : '',
+      }),
+    });
+  }
+  */
   getMyCartItem() {
     return this.http.get<IViewCart[]>(this.server + API_INFO.mycart);
   }

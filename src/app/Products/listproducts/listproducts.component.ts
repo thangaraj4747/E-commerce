@@ -4,6 +4,7 @@ import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IPdtDetails } from './products.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listproducts',
@@ -12,7 +13,8 @@ import { IPdtDetails } from './products.model';
 })
 export class ListproductsComponent implements OnInit {
   productLists: IPdtDetails[] = [];
-
+  toggleImage: boolean = true;
+  myParamSubscribe: Subscription;
   constructor(
     public pdtSer: ProductsService,
     public spinnerSer: SpinnerService,
@@ -21,17 +23,23 @@ export class ListproductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pdtSer.getProductList().subscribe({
-      next: (res) => {
-        this.productLists = res;
+    this.myParamSubscribe = this.aRoute.params.subscribe({
+      next: (params: Params) => {
+        if (params['catid']) {
+          this.getPdtCatwise(params['catid']);
+          return;
+        }
+        this.getProductByList();
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
-    this.aRoute.params.subscribe({
-      next: (params: Params) => {
-        this.getPdtCatwise(params['catid']);
+  }
+  getProductByList() {
+    this.pdtSer.getProductList().subscribe({
+      next: (res: IPdtDetails[]) => {
+        this.productLists = res;
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
@@ -60,8 +68,17 @@ export class ListproductsComponent implements OnInit {
           this.snackBarSer.openSnackBar(res, 'success');
         },
         error: () => {
-          this.snackBarSer.openSnackBar('Something went wrong', 'failure');
+          this.snackBarSer.openSnackBar(
+            'Please check login or Something went wrong',
+            'failure'
+          );
         },
       });
+  }
+  toggleImages() {
+    this.toggleImage = !this.toggleImage;
+  }
+  ngOnDestroy(): void {
+    this.myParamSubscribe.unsubscribe();
   }
 }

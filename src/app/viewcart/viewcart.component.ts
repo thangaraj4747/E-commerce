@@ -29,17 +29,18 @@ export class ViewcartComponent implements OnInit {
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
-        this.myRouter.navigateByUrl('/');
+        this.myRouter.navigateByUrl('/login');
+        localStorage.clear();
       },
     });
   }
   doRemove(productId: number) {
     this.pdtSer.removeCart(productId).subscribe({
-      next: (res) => {
+      next: (res: string) => {
         this.pdtSer.cartCount.next('emited');
-        this.snackBarSer.openSnackBar('res', 'success');
+        this.snackBarSer.openSnackBar(res, 'success');
         this.productList = this.productList.filter((obj) => {
-          return productId != obj._id;
+          return obj._id != productId;
         });
         this.totalAmount = 0;
         this.productList.forEach((obj) => {
@@ -63,7 +64,7 @@ export class ViewcartComponent implements OnInit {
         pdtPrice: pdtPrice,
       })
       .subscribe({
-        next: (data) => {
+        next: (data: string) => {
           const index = this.productList.findIndex((obj) => {
             return obj._id === cartPdtId;
           });

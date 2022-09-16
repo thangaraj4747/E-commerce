@@ -40,3 +40,10 @@ export interface IPdtDetails {
   pdtCatId: string;
   pdtImgPath: string;
 }
+export interface IAddPdt {
+  pdtCatId: number;
+  pdtName: string;
+  pdtPrice: number;
+  pdtDesc: string;
+  pdtImg: string;
+}

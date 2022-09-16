@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_INFO } from './api.constant';
 import {
+  IAddPdt,
   IAddtoCart,
   ICategory,
   IPdtDetails,
@@ -38,5 +39,8 @@ export class ProductsService {
   }
   updateCart(pdtDetails: IUpdateCart): Observable<string> {
     return this.http.put<string>(this.server + API_INFO.updateCart, pdtDetails);
+  }
+  addProduct(addPdt: any): Observable<string> {
+    return this.http.post<string>(this.server + API_INFO.addproducts, addPdt);
   }
 }
