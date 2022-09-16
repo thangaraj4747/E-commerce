@@ -3,8 +3,6 @@ import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IPdtDetails } from './products.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listproducts',
@@ -12,9 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./listproducts.component.scss'],
 })
 export class ListproductsComponent implements OnInit {
-  productLists: IPdtDetails[] = [];
-  toggleImage: boolean = true;
-  myParamSubscribe: Subscription;
+  productLists: any[] = [];
+
   constructor(
     public pdtSer: ProductsService,
     public spinnerSer: SpinnerService,
@@ -23,23 +20,17 @@ export class ListproductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.myParamSubscribe = this.aRoute.params.subscribe({
-      next: (params: Params) => {
-        if (params['catid']) {
-          this.getPdtCatwise(params['catid']);
-          return;
-        }
-        this.getProductByList();
+    this.pdtSer.getProductList().subscribe({
+      next: (res) => {
+        this.productLists = res;
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
       },
     });
-  }
-  getProductByList() {
-    this.pdtSer.getProductList().subscribe({
-      next: (res: IPdtDetails[]) => {
-        this.productLists = res;
+    this.aRoute.params.subscribe({
+      next: (params: Params) => {
+        this.getPdtCatwise(params['catid']);
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
@@ -48,7 +39,7 @@ export class ListproductsComponent implements OnInit {
   }
   getPdtCatwise(catid: string) {
     this.pdtSer.getPdtCatwise(catid).subscribe({
-      next: (data: IPdtDetails[]) => {
+      next: (data) => {
         this.productLists = data;
       },
       error: () => {
@@ -68,17 +59,8 @@ export class ListproductsComponent implements OnInit {
           this.snackBarSer.openSnackBar(res, 'success');
         },
         error: () => {
-          this.snackBarSer.openSnackBar(
-            'Please check login or Something went wrong',
-            'failure'
-          );
+          this.snackBarSer.openSnackBar('Something went wrong', 'failure');
         },
       });
-  }
-  toggleImages() {
-    this.toggleImage = !this.toggleImage;
-  }
-  ngOnDestroy(): void {
-    this.myParamSubscribe.unsubscribe();
   }
 }

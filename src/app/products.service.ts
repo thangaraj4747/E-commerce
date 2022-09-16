@@ -3,11 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_INFO } from './api.constant';
 import {
-  IAddPdt,
-  IAddtoCart,
   ICategory,
-  IPdtDetails,
-  IUpdateCart,
+  IListProducts,
 } from './Products/listproducts/products.model';
 import { Observable, Subject } from 'rxjs';
 
@@ -18,18 +15,18 @@ export class ProductsService {
   server = environment.server;
   public cartCount = new Subject();
   constructor(public http: HttpClient) {}
-  getProductList(): Observable<IPdtDetails[]> {
-    return this.http.get<IPdtDetails[]>(this.server + API_INFO.listProducts);
+  getProductList(): Observable<IListProducts[]> {
+    return this.http.get<IListProducts[]>(this.server + API_INFO.listProducts);
   }
   getCategory(): Observable<ICategory[]> {
     return this.http.get<ICategory[]>(this.server + API_INFO.category);
   }
-  getPdtCatwise(catid: string): Observable<IPdtDetails[]> {
-    return this.http.get<IPdtDetails[]>(
+  getPdtCatwise(catid: string): Observable<any[]> {
+    return this.http.get<any[]>(
       this.server + API_INFO.pdtCatwise.replace('{catid}', catid)
     );
   }
-  addToCart(pdtData: IAddtoCart): Observable<string> {
+  addToCart(pdtData: any): Observable<string> {
     return this.http.post<string>(this.server + API_INFO.addtocart, pdtData);
   }
   removeCart(pdtId: number): Observable<string> {
@@ -37,10 +34,7 @@ export class ProductsService {
       this.server + API_INFO.delete.replace('{cartid}', `${pdtId}`)
     );
   }
-  updateCart(pdtDetails: IUpdateCart): Observable<string> {
+  updateCart(pdtDetails: any) {
     return this.http.put<string>(this.server + API_INFO.updateCart, pdtDetails);
-  }
-  addProduct(addPdt: any): Observable<string> {
-    return this.http.post<string>(this.server + API_INFO.addproducts, addPdt);
   }
 }

@@ -8,7 +8,7 @@
             </div>
             <div class="form">
                 <h2>Login to your account</h2>
-                <!-- <button (click)="getUserData()">Get User Data</button> -->
+                <button (click)="getUserData()">Get User Data</button>
                 <form [formGroup]="loginForm" (submit)="doLogin()">
                     <input type="text" name="Username" placeholder="Username" formControlName="Username">
                     <p class="alert alert-danger" *ngIf="userNameCtrl.touched && userNameCtrl.invalid">Please Enter Username</p>

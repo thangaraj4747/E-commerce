@@ -10,7 +10,7 @@
         </form>
     </div>
     <div class="product_list_header">
-      <a routerLink="/auth/viewcart">
+      <a routerLink="/viewcart">
         <input type="submit" name="submit" value="Cart count {{cartCount}}" class="button" />
       </a>
     </div>
@@ -26,7 +26,7 @@
                             <li><a routerLink="/login">Sign Up</a></li>
                         </ul>
                         <ul class="dropdown-menu drp-mnu" *ngIf="userSer.isLoggedIn()">
-                          <li><a routerLink="/auth/add-products">Add Products</a></li>
+                          <li><a routerLink="/add-products">Add Products</a></li>
                           <li><a (click)="doLogout()">Sign out</a></li>
                       </ul>
                     </div>
@@ -55,9 +55,9 @@
         </div>
         <div class="w3ls_logo_products_left1">
             <ul class="phone_email">
-                <li><i class="fa fa-phone" aria-hidden="true"></i>(+91) 955 176 6353</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
                 <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a
-                        href="mailto:thangaraj.sps@gmail.com">thangaraj.sps@gmail.com</a></li>
+                        href="mailto:store@grocery.com">store@grocery.com</a></li>
             </ul>
         </div>
         <div class="clearfix"> </div>
