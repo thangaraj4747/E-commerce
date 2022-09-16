@@ -10,4 +10,5 @@ export const API_INFO = {
   addtocart: '/addtocart',
   delete: '/removecart/{cartid}',
   updateCart: '/updatecart',
+  addproducts: '/addproducts',
 };
