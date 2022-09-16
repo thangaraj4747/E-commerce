@@ -3,6 +3,7 @@ import { ProductsService } from './../products.service';
 import { Router } from '@angular/router';
 import { UsersService } from './../users.service';
 import { Component, OnInit } from '@angular/core';
+import { IViewCart } from '../Products/listproducts/products.model';
 
 @Component({
   selector: 'app-viewcart',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./viewcart.component.scss'],
 })
 export class ViewcartComponent implements OnInit {
-  productList: any[] = [];
+  productList: IViewCart[] = [];
   totalAmount: number = 0;
   constructor(
     public userSer: UsersService,
@@ -20,8 +21,7 @@ export class ViewcartComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.userSer.getMyCartItem().subscribe({
-      next: (data: any[]) => {
-        console.log(data);
+      next: (data: IViewCart[]) => {
         this.productList = data;
         this.productList.forEach((obj) => {
           this.totalAmount += obj.cartPdtPrice;
@@ -29,17 +29,18 @@ export class ViewcartComponent implements OnInit {
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
-        this.myRouter.navigateByUrl('/');
+        this.myRouter.navigateByUrl('/login');
+        localStorage.clear();
       },
     });
   }
   doRemove(productId: number) {
     this.pdtSer.removeCart(productId).subscribe({
-      next: (res) => {
+      next: (res: string) => {
         this.pdtSer.cartCount.next('emited');
-        this.snackBarSer.openSnackBar('res', 'success');
+        this.snackBarSer.openSnackBar(res, 'success');
         this.productList = this.productList.filter((obj) => {
-          return productId != obj._id;
+          return obj._id != productId;
         });
         this.totalAmount = 0;
         this.productList.forEach((obj) => {
@@ -63,7 +64,7 @@ export class ViewcartComponent implements OnInit {
         pdtPrice: pdtPrice,
       })
       .subscribe({
-        next: (data) => {
+        next: (data: string) => {
           const index = this.productList.findIndex((obj) => {
             return obj._id === cartPdtId;
           });

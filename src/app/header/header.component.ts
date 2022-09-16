@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
   getMyCartCount() {
     this.userSer.getMyCartCount().subscribe({
-      next: (data) => {
+      next: (data: number) => {
         this.cartCount = data;
       },
       error: () => {

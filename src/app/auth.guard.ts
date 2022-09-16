@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     if (!this.userSer.isLoggedIn()) {
       localStorage.clear();
-      this.myRouter.navigateByUrl('/');
+      this.myRouter.navigateByUrl('/login');
     }
     return this.userSer.isLoggedIn();
   }
