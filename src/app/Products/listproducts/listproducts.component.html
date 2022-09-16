@@ -1,9 +1,6 @@
 <div class="w3ls_w3l_banner_nav_right_grid">
     <div class="w3ls_w3l_banner_nav_right_grid1">
-      <div class="title">
         <h6>food</h6>
-        <button (click)="toggleImages()">{{toggleImage? 'Hide images' : 'Show images'}}</button>
-      </div>
         <div class="col-md-3 w3ls_w3l_banner_left" *ngFor="let products of productLists">
             <div class="hover14 column">
                 <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
@@ -14,10 +11,10 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="single.html"><img *ngIf="toggleImage" src="assets/images/{{products.pdtImgPath}}" alt=" "
+                                    <a href="single.html"><img src="assets/images/{{products.pdtImgPath}}" alt=" "
                                             class="img-responsive" /></a>
                                     <p>{{products.pdtName}}</p>
-                                    <h4>{{products.pdtPrice | currency: 'INR' }} <span class="visually-hidden">{{products.pdtPrice - (products.pdtPrice * 20/100) | currency: 'INR' }}</span></h4>
+                                    <h4>{{products.pdtPrice - (products.pdtPrice * 20/100) | currency: 'INR' }} <span>{{products.pdtPrice | currency: 'INR' }}</span></h4>
                                   </div>
                                   <div class="snipcart-details">
                                     <input type="submit" name="submit" value="Add to cart" class="button" (click)="addToCarrt(products._id, products.pdtPrice)"/>

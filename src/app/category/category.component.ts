@@ -9,18 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  categoryList: ICategory[];
   constructor(
     public pdtSer: ProductsService,
     public snackBarSer: SnackbarService
   ) {}
+  categoryList: ICategory[];
   ngOnInit(): void {
     this.getCategory();
   }
 
   getCategory() {
     this.pdtSer.getCategory().subscribe({
-      next: (data: ICategory[]) => {
+      next: (data) => {
         this.categoryList = data;
       },
       error: () => {

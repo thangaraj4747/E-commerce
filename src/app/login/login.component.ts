@@ -87,13 +87,13 @@ export class LoginComponent implements OnInit {
   doLogin() {
     this.userSer.doLogin(this.loginForm.value).subscribe({
       next: (res: string) => {
-        if (res.length > 0) {
+        if (res.length != 0) {
           localStorage.setItem('loggedUser', res);
           this.pdtSer.cartCount.next('emit');
           this.myRouter.navigateByUrl('/');
           return;
         }
-        this.snackBarSer.openSnackBar('Invalid Username / Password', 'failure');
+        this.snackBarSer.openSnackBar('Invalid Username / Password', 'success');
       },
       error: () => {
         this.snackBarSer.openSnackBar('Something went wrong', 'failure');
