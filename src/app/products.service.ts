@@ -9,14 +9,13 @@ import {
   IPdtDetails,
   IUpdateCart,
 } from './Products/listproducts/products.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   server = environment.server;
-  public cartCount = new Subject();
   constructor(public http: HttpClient) {}
   getProductList(): Observable<IPdtDetails[]> {
     return this.http.get<IPdtDetails[]>(this.server + API_INFO.listProducts);

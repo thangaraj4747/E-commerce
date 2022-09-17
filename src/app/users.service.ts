@@ -1,5 +1,12 @@
+import { Router } from '@angular/router';
 import { IViewCart } from './Products/listproducts/products.model';
-import { Observable } from 'rxjs';
+import {
+  debounceTime,
+  fromEvent,
+  Observable,
+  Subject,
+  Subscription,
+} from 'rxjs';
 import { API_INFO } from './api.constant';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,7 +18,11 @@ import { ILoginData, IRegisterationData } from './login/data/login.model';
 })
 export class UsersService {
   server = environment.server;
-  constructor(public http: HttpClient) {}
+  public cartCount = new Subject();
+  evenHandler = new Subject();
+  eventSubscription: Subscription;
+  timer: any;
+  constructor(public http: HttpClient, public myRouter: Router) {}
   checkAvailablity(uname: string): Observable<number> {
     return this.http.get<number>(
       this.server + API_INFO.usernameCheck.replace('{username}', uname)
@@ -43,5 +54,40 @@ export class UsersService {
   }
   getMyCartCount() {
     return this.http.get<number>(this.server + API_INFO.cartcount);
+  }
+  listenGlobalEvents() {
+    fromEvent(document, 'mouseover').subscribe({
+      next: () => this.evenHandler.next(''),
+    });
+    fromEvent(document, 'click').subscribe({
+      next: () => this.evenHandler.next(''),
+    });
+    fromEvent(document, 'keyup').subscribe({
+      next: () => this.evenHandler.next(''),
+    });
+    this.eventSubscription = this.evenHandler
+      .pipe(debounceTime(1000))
+      .subscribe({
+        next: () => {
+          this.refreshTimer();
+        },
+      });
+  }
+  doSetTimeout() {
+    this.timer = setTimeout(() => {
+      if (this.isLoggedIn()) {
+        this.doLogout();
+      }
+    }, 60 * 1000);
+  }
+  refreshTimer() {
+    clearTimeout(this.timer);
+    this.doSetTimeout();
+  }
+  doLogout() {
+    localStorage.clear();
+    this.myRouter.navigateByUrl('/login');
+    this.cartCount.next(0);
+    this.eventSubscription.unsubscribe();
   }
 }

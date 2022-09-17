@@ -19,9 +19,15 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMyCartCount();
-    this.pdtSer.cartCount.subscribe({
+    if (this.userSer.isLoggedIn()) {
+      this.getMyCartCount();
+    }
+    this.userSer.cartCount.subscribe({
       next: () => {
+        if (!this.userSer.isLoggedIn()) {
+          this.cartCount = 0;
+          return;
+        }
         this.getMyCartCount();
       },
     });
