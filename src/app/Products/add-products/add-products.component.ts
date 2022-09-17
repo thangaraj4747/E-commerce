@@ -1,8 +1,8 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CategoryComponent } from './../category/category.component';
+import { CategoryComponent } from '../../category/category.component';
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../products.service';
-import { SnackbarService } from '../snackbar.service';
+import { ProductsService } from '../../products.service';
+import { SnackbarService } from '../../snackbar.service';
 
 @Component({
   selector: 'app-add-products',

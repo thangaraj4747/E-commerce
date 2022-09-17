@@ -2,7 +2,7 @@ import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { AddProductsComponent } from '../add-products/add-products.component';
+import { AddProductsComponent } from '../Products/add-products/add-products.component';
 import { ViewcartComponent } from '../viewcart/viewcart.component';
 
 @NgModule({
