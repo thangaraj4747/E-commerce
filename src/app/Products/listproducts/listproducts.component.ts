@@ -1,8 +1,9 @@
+import { UsersService } from './../../users.service';
 import { SnackbarService } from './../../snackbar.service';
 import { SpinnerService } from './../../spinner.service';
 import { ProductsService } from './../../products.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { IPdtDetails } from './products.model';
 import { Subscription } from 'rxjs';
 
@@ -17,9 +18,11 @@ export class ListproductsComponent implements OnInit {
   myParamSubscribe: Subscription;
   constructor(
     public pdtSer: ProductsService,
+    public userSer: UsersService,
     public spinnerSer: SpinnerService,
     public aRoute: ActivatedRoute,
-    public snackBarSer: SnackbarService
+    public snackBarSer: SnackbarService,
+    public myRouter: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,14 +67,19 @@ export class ListproductsComponent implements OnInit {
       })
       .subscribe({
         next: (res) => {
-          this.pdtSer.cartCount.next('emited');
+          this.userSer.cartCount.next('emited');
           this.snackBarSer.openSnackBar(res, 'success');
         },
-        error: () => {
-          this.snackBarSer.openSnackBar(
-            'Please check login or Something went wrong',
-            'failure'
-          );
+        error: (error) => {
+          if ((error.status = 401)) {
+            this.snackBarSer.openSnackBar(
+              'Please Login Using Your Credential',
+              'failure'
+            );
+            this.myRouter.navigateByUrl('/login');
+            return;
+          }
+          this.snackBarSer.openSnackBar('Something went wrong', 'failure');
         },
       });
   }

@@ -37,7 +37,7 @@ export class ViewcartComponent implements OnInit {
   doRemove(productId: number) {
     this.pdtSer.removeCart(productId).subscribe({
       next: (res: string) => {
-        this.pdtSer.cartCount.next('emited');
+        this.userSer.cartCount.next('emited');
         this.snackBarSer.openSnackBar(res, 'success');
         this.productList = this.productList.filter((obj) => {
           return obj._id != productId;
