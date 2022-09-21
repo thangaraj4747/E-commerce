@@ -71,12 +71,20 @@ export class ListproductsComponent implements OnInit {
           this.snackBarSer.openSnackBar(res, 'success');
         },
         error: (error) => {
-          if ((error.status = 401)) {
+          if (error.status === 401) {
             this.snackBarSer.openSnackBar(
               'Please Login Using Your Credential',
               'failure'
             );
             this.myRouter.navigateByUrl('/login');
+            localStorage.clear();
+            return;
+          }
+          if (error.status === 409) {
+            this.snackBarSer.openSnackBar(
+              'Selected product already added your cart. Plese check your cart items',
+              'failure'
+            );
             return;
           }
           this.snackBarSer.openSnackBar('Something went wrong', 'failure');
