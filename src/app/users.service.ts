@@ -18,7 +18,7 @@ import { ILoginData, IRegisterationData } from './login/data/login.model';
 })
 export class UsersService {
   server = environment.server;
-  public cartCount = new Subject();
+  cartCount = new Subject();
   evenHandler = new Subject();
   eventSubscription: Subscription;
   timer: any;

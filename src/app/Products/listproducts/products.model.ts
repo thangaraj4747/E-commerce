@@ -18,27 +18,26 @@ export interface IAddtoCart {
 
 export interface IUpdateCart {
   cartId: number;
-  cartPdtQty: number;
+  cartQty: number;
   pdtPrice: number;
 }
 
 export interface IViewCart {
   _id: number;
   cartPdtId: number;
-  cartPdtPrice: number;
+  cartPdtPrice: number
   cartUserId: number;
-  cartPdtQty: number;
-  productdetails: IPdtDetails[];
+  cartQty: number
+  orderdetails: IPdtDetails[];
 }
 
 export interface IPdtDetails {
   _id: number;
-  catId: string;
-  pdtDesc: string;
-  pdtName: string;
-  pdtPrice: number;
-  pdtCatId: string;
-  pdtImgPath: string;
+  productDesc: string
+  productName: string
+  productPrice: number;
+  productcatId: string
+  productImgPath: string;
 }
 export interface IAddPdt {
   pdtCatId: number;

@@ -24,7 +24,7 @@ export class ViewcartComponent implements OnInit {
       next: (data: IViewCart[]) => {
         this.productList = data;
         this.productList.forEach((obj) => {
-          this.totalAmount += obj.cartPdtPrice;
+          this.totalAmount += obj.orderdetails[0].productPrice;
         });
       },
       error: () => {
@@ -44,7 +44,7 @@ export class ViewcartComponent implements OnInit {
         });
         this.totalAmount = 0;
         this.productList.forEach((obj) => {
-          this.totalAmount += obj.cartPdtPrice;
+          this.totalAmount += obj.orderdetails[0].productPrice;
         });
       },
       error: () => {
@@ -52,15 +52,15 @@ export class ViewcartComponent implements OnInit {
       },
     });
   }
-  updateCart(cartPdtId: number, cartPdtQty: number, pdtPrice: number) {
-    if (cartPdtQty === 0) {
+  updateCart(cartPdtId: number, cartQty: number, pdtPrice: number) {
+    if (cartQty === 0) {
       this.snackBarSer.openSnackBar('Not able to add negative product', 'info');
       return;
     }
     this.pdtSer
       .updateCart({
         cartId: cartPdtId,
-        cartPdtQty: cartPdtQty,
+        cartQty: cartQty,
         pdtPrice: pdtPrice,
       })
       .subscribe({
@@ -68,11 +68,11 @@ export class ViewcartComponent implements OnInit {
           const index = this.productList.findIndex((obj) => {
             return obj._id === cartPdtId;
           });
-          this.productList[index].cartPdtQty = cartPdtQty;
-          this.productList[index].cartPdtPrice = cartPdtQty * pdtPrice;
+          this.productList[index].cartQty = cartQty;
+          this.productList[index].orderdetails[0].productPrice = cartQty * pdtPrice;
           this.totalAmount = 0;
           this.productList.forEach((obj) => {
-            this.totalAmount += obj.cartPdtPrice;
+            this.totalAmount += obj.orderdetails[0].productPrice;
           });
           this.snackBarSer.openSnackBar(data, 'success');
         },

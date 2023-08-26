@@ -19,19 +19,19 @@
       <tbody>
         <tr class="rem{{i}}" *ngFor="let products of productList; index as i">
         <td class="invert">{{i+1}}</td>
-        <td class="invert-image"><a href="single.html"><img src="assets/images/{{products.productdetails[0].pdtImgPath}}" alt=" " class="img-responsive"></a></td>
+        <td class="invert-image"><a href="single.html"><img src="assets/product_images/{{products.orderdetails[0].productImgPath}}" alt=" " class="img-responsive"></a></td>
         <td class="invert">
            <div class="quantity">
             <div class="quantity-select">
-              <div class="entry value-minus" (click)="updateCart(products._id, products.cartPdtQty-1, products.productdetails[0].pdtPrice)">&nbsp;</div>
-              <div class="entry value"><span>{{products.cartPdtQty}}</span></div>
-              <div class="entry value-plus active" (click)="updateCart(products._id, products.cartPdtQty+1, products.productdetails[0].pdtPrice)">&nbsp;</div>
+              <div class="entry value-minus" (click)="updateCart(products._id, products.cartQty-1, products.cartPdtPrice)">&nbsp;</div>
+              <div class="entry value"><span>{{products.cartQty}}</span></div>
+              <div class="entry value-plus active" (click)="updateCart(products._id, products.cartQty+1, products.cartPdtPrice)">&nbsp;</div>
             </div>
           </div>
         </td>
-        <td class="invert">{{products.productdetails[0].pdtName}}</td>
+        <td class="invert">{{products.orderdetails[0].productName}}</td>
 
-        <td class="invert">{{products.cartPdtPrice | currency: 'INR'}}</td>
+        <td class="invert">{{products.orderdetails[0].productPrice | currency: 'INR'}}</td>
         <td class="invert">
           <div class="rem">
             <div class="close1" (click)="doRemove(products._id)"> </div>
@@ -46,7 +46,7 @@
     <div class="col-md-4 checkout-left-basket">
       <h4>Continue to basket</h4>
       <ul>
-        <li *ngFor="let products of productList">{{products.productdetails[0].pdtName}} <i>-</i> <span>{{products.cartPdtPrice | currency: 'INR'}} </span></li>
+        <li *ngFor="let products of productList">{{products.orderdetails[0].productName}} <i>-</i> <span>{{products.orderdetails[0].productPrice | currency: 'INR'}} </span></li>
         <li>Total Service Charges <i>-</i> <span>$00.00</span></li>
         <li>Total <i>-</i> <span>{{totalAmount | currency: 'INR'}}</span></li>
       </ul>

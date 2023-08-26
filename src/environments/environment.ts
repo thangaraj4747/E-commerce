@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server: 'https://credo-shoppingcartv5.herokuapp.com',
+  server: 'https://e-commerce-gpu0.onrender.com',
 };
 
 /*

@@ -13,7 +13,7 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  unameAvailablity: boolean;
+  unameAvailablity = true;
   constructor(
     public userSer: UsersService,
     public myRouter: Router,

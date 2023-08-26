@@ -14,13 +14,13 @@
                         <figure>
                             <div class="snipcart-item block">
                                 <div class="snipcart-thumb">
-                                    <a href="single.html"><img *ngIf="toggleImage" src="assets/images/{{products.pdtImgPath}}" alt=" "
+                                    <a href="single.html"><img *ngIf="toggleImage" src="assets/product_images/{{products.productImgPath}}" alt=" "
                                             class="img-responsive" /></a>
-                                    <p>{{products.pdtName}}</p>
-                                    <h4>{{products.pdtPrice | currency: 'INR' }} <span class="visually-hidden">{{products.pdtPrice - (products.pdtPrice * 20/100) | currency: 'INR' }}</span></h4>
+                                    <p>{{products.productName}}</p>
+                                    <h4>{{products.productPrice | currency: 'INR' }} <span class="visually-hidden">{{products.productPrice + (products.productPrice * 20/100) | currency: 'INR' }}</span></h4>
                                   </div>
                                   <div class="snipcart-details">
-                                    <input type="submit" name="submit" value="Add to cart" class="button" (click)="addToCarrt(products._id, products.pdtPrice)"/>
+                                    <input type="submit" name="submit" value="Add to cart" class="button" (click)="addToCarrt(products._id, products.productPrice)"/>
                                   </div>
                             </div>
                         </figure>

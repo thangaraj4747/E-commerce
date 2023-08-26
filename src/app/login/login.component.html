@@ -21,7 +21,7 @@
             <div class="form">
                 <h2>Create an account</h2>
                 <form #f="ngForm" (submit)="doRegisteration(f)">
-                    <input type="text" name="Username" placeholder="Username" required=" " ngModel (blur)="checkUsername(uname.value)" #uname="ngModel" minlength="3">
+                    <input type="text" name="Username" placeholder="Username" required=" " ngModel #uname="ngModel" minlength="3">
                     <p class="alert alert-danger" *ngIf="!unameAvailablity && uname.dirty">Username Already Taken</p>
                     <p class="alert alert-danger" *ngIf="uname.errors?.['minlength']">Please Enter Minimum 3 Characters</p>
                     <input type="password" name="Password" placeholder="Password" required=" " ngModel #pwd="ngModel" minlength="5">

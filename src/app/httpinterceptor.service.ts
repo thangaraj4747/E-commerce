@@ -22,7 +22,7 @@ export class HttpinterceptorService implements HttpInterceptor {
     this.spinnerSer.showSpinner();
     var tokenReq = req.clone({
       setHeaders: {
-        myauthtoken: this.userSer.getMyToken() ? this.userSer.getMyToken() : '',
+        myauthkey: this.userSer.getMyToken() ? this.userSer.getMyToken() : '',
       },
     });
     return next
